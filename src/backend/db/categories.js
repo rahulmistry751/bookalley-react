@@ -20,8 +20,13 @@ export const categories = [
   },
   {
     _id: uuid(),
-    categoryName: "horror",
+    categoryName: "self help",
+    description: "instruct its readers on solving personal problems.",
+  },
+  {
+    _id: uuid(),
+    categoryName: "fantasy",
     description:
-      "Meant to cause discomfort and fear for both the character and readers, horror writers often make use of supernatural and paranormal elements in morbid stories that are sometimes a little too realistic.",
+      "unrealistic settings, or magic, often set in a medieval universe, or possibly involving mythical beings or supernatural forms as a primary element of the plot, theme, or setting.",
   },
 ];
