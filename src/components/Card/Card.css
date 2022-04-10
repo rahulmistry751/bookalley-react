@@ -1,0 +1,36 @@
+.card {
+  cursor: pointer;
+  width: 18rem;
+  border-radius: 0.7rem;
+}
+.card-hori {
+  width: 28rem;
+  height: auto;
+}
+.card-img-container {
+  height: 22rem;
+}
+.card-img {
+  object-fit: contain;
+}
+.card-header > * {
+  margin-bottom: 0.5rem;
+}
+.book-heading {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.rating {
+  margin-bottom: 1rem;
+}
+.star-rating {
+  height: min-content;
+  color: orange;
+  margin-right: 0.35rem;
+}
+/* Button */
+.button-outlined:hover {
+  border: var(--primary-moderate) 0.15rem solid;
+  background-color: transparent;
+}

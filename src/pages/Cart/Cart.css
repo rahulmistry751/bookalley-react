@@ -1,0 +1,41 @@
+.cart-page {
+  height: auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+.cart-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cart-header {
+  width: 100%;
+}
+.bill-section {
+  width: 100%;
+}
+.bill > * {
+  margin: 1rem;
+}
+.bill-heading {
+  border-bottom: 1px solid var(--primary-moderate);
+}
+.cart-footer {
+  align-self: end;
+}
+.input-qty {
+  width: 2rem;
+  margin: 0 0.2rem 0 0.2rem;
+}
+.catalogue {
+  display: flex;
+  justify-content: space-between;
+  gap: 5rem;
+}
+.total-amt-container {
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--primary-moderate);
+}
+.catalogue .discount,
+.catalogue .discount + .amt {
+  color: var(--secondary-dark);
+}

@@ -1,0 +1,15 @@
+.popular-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.popular-list {
+  width: 100%;
+}
+.list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+}

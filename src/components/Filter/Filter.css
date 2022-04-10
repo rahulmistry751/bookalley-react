@@ -1,0 +1,25 @@
+.sidebar {
+  padding: 2rem;
+  min-width: 100%;
+  background: var(--font-color-invert);
+}
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+}
+.slider {
+  display: flex;
+  flex-direction: column;
+}
+.input-slider {
+  accent-color: var(--primary);
+}
+.price-label {
+  display: flex;
+  justify-content: space-between;
+}
+.input-checkbox,
+.input-radio {
+  margin-bottom: 0;
+  margin-right: 0.5rem;
+}
