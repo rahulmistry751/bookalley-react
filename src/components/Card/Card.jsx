@@ -20,7 +20,8 @@ const Card = ({ item }) => {
               </div>
             </div>
             <div className="rating">
-              <i className="fas fa-star star-rating mgt-16"></i>4.5
+              <i className="fas fa-star star-rating mgt-16"></i>
+              {item.rating}
             </div>
           </div>
         </div>

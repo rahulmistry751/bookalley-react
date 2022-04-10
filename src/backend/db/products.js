@@ -1,5 +1,14 @@
 import { v4 as uuid } from "uuid";
-import { atomic, goneGirl, fiveAm, devotionOfSuspect } from "../../assets";
+import {
+  atomic,
+  goneGirl,
+  fiveAm,
+  devotionOfSuspect,
+  alchemist,
+  defenderInChief,
+  inColdBlood,
+  greatGatsby,
+} from "../../assets";
 
 /**
  * Product Database can be added here.
@@ -49,6 +58,50 @@ export const products = [
     originalPrice: "799",
     discountPercent: "10",
     rating: 5,
+    categoryName: "fiction",
+  },
+  {
+    _id: uuid(),
+    img: alchemist,
+    title: "The Alchemist",
+    author: "Paulo Coelho",
+    discountPrice: "253",
+    originalPrice: "350",
+    discountPercent: "28",
+    rating: 4.5,
+    categoryName: "fiction",
+  },
+  {
+    _id: uuid(),
+    img: defenderInChief,
+    title: "Defender in Chief",
+    author: "John Yoo",
+    discountPrice: "798",
+    originalPrice: "999",
+    discountPercent: "20",
+    rating: 3.8,
+    categoryName: "non-fiction",
+  },
+  {
+    _id: uuid(),
+    img: inColdBlood,
+    title: "In Cold Blood",
+    author: "Truman Capote",
+    discountPrice: "899",
+    originalPrice: "999",
+    discountPercent: "10",
+    rating: 4.1,
+    categoryName: "non-fiction",
+  },
+  {
+    _id: uuid(),
+    img: greatGatsby,
+    title: "The Great Gatsby",
+    author: "F. Scott Fitzgerald",
+    discountPrice: "109",
+    originalPrice: "399",
+    discountPercent: "72%",
+    rating: 4.4,
     categoryName: "fiction",
   },
 ];
