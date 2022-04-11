@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { products } from "../../backend/db/products";
 import "./PopularNow.css";
 import { Card } from "../Card/Card";
+import { useProduct } from "../../context/product-context";
 const PopularNow = () => {
+  const { products } = useProduct();
   return (
     <div className="popular-section">
       <div className="popular-heading">
@@ -16,8 +17,8 @@ const PopularNow = () => {
       <div className="popular-list">
         <ul className="list">
           {products.map((item) => (
-            <li className="list-item">
-              <Card item={item} />
+            <li className="list-item" key={item._id}>
+              <Card item={item} key={item._id} />
             </li>
           ))}
         </ul>
