@@ -1,7 +1,9 @@
 import React from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
+import { useProduct } from "../../context/product-context";
 const Header = () => {
+  const { wishlist } = useProduct();
   return (
     <header className="header">
       <nav className="navbar">
@@ -40,8 +42,19 @@ const Header = () => {
             </Link>
           </li>
           <li className="navbar-item">
-            <Link to="/wishlist" aria-label="wishlist link">
-              <i className="fas fa-bookmark"></i>
+            <Link
+              to="/wishlist"
+              aria-label="wishlist link"
+              className={wishlist.length ? "badge-icon" : ""}
+            >
+              <div className="badge-container">
+                <i className="fas fa-bookmark"></i>
+                {wishlist.length ? (
+                  <span className="badge">{wishlist.length}</span>
+                ) : (
+                  ""
+                )}
+              </div>
             </Link>
           </li>
           <li className="navbar-item">
