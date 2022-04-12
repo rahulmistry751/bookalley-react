@@ -25,7 +25,7 @@ export const products = [
     originalPrice: "499",
     discountPercent: "31",
     rating: 3.2,
-    categoryName: "fiction",
+    categoryName: "Fiction",
   },
   {
     _id: uuid(),
@@ -36,7 +36,7 @@ export const products = [
     originalPrice: "999",
     discountPercent: "40",
     rating: 2.5,
-    categoryName: "self help",
+    categoryName: "Self help",
   },
   {
     _id: uuid(),
@@ -47,7 +47,7 @@ export const products = [
     originalPrice: "999",
     discountPercent: "30",
     rating: 1.9,
-    categoryName: "self help",
+    categoryName: "Self help",
   },
   {
     _id: uuid(),
@@ -58,7 +58,7 @@ export const products = [
     originalPrice: "799",
     discountPercent: "10",
     rating: 5,
-    categoryName: "fiction",
+    categoryName: "Fiction",
   },
   {
     _id: uuid(),
@@ -69,7 +69,7 @@ export const products = [
     originalPrice: "350",
     discountPercent: "28",
     rating: 4.5,
-    categoryName: "fiction",
+    categoryName: "Fiction",
   },
   {
     _id: uuid(),
@@ -80,7 +80,7 @@ export const products = [
     originalPrice: "999",
     discountPercent: "20",
     rating: 3.8,
-    categoryName: "non-fiction",
+    categoryName: "Non-fiction",
   },
   {
     _id: uuid(),
@@ -91,7 +91,7 @@ export const products = [
     originalPrice: "999",
     discountPercent: "10",
     rating: 4.1,
-    categoryName: "non-fiction",
+    categoryName: "Non-fiction",
   },
   {
     _id: uuid(),
@@ -102,6 +102,6 @@ export const products = [
     originalPrice: "399",
     discountPercent: "72%",
     rating: 4.4,
-    categoryName: "fiction",
+    categoryName: "Fiction",
   },
 ];

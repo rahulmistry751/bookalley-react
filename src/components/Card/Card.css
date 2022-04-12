@@ -34,3 +34,6 @@
   border: var(--primary-moderate) 0.15rem solid;
   background-color: transparent;
 }
+.button {
+  font-family: "Poppins", sans-serif;
+}
