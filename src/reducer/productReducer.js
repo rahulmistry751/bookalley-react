@@ -50,7 +50,7 @@ const productReducer = (productState, action) => {
     case PRODUCT_ACTIONS.ADD_TO_WISHLIST:
       if (productState.wishlist.length) {
         updatedWishlistItems = productState.wishlist.map((item) => {
-          return item._id === action.payload.productId
+          return item._id === action.payload.product._id
             ? [...productState.wishlist]
             : [...productState.wishlist, { ...action.payload.product }];
         })[0];
@@ -66,7 +66,7 @@ const productReducer = (productState, action) => {
       };
     case PRODUCT_ACTIONS.REMOVE_FROM_WISHLIST:
       updatedWishlistItems = productState.wishlist.filter(
-        (wishItem) => wishItem.id !== action.payload.product.id
+        (wishItem) => wishItem._id !== action.payload.product._id
       );
       return { ...productState, wishlist: updatedWishlistItems };
     default:
