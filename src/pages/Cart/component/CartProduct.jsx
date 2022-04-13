@@ -29,7 +29,10 @@ const CartProduct = ({ item }) => {
               {item.rating}
             </div>
             <div className="qty">
-              <button className="button button-sm">
+              <button
+                className="button button-sm"
+                disabled={item.quantity > 1 ? false : true}
+              >
                 <i
                   className="fas fa-minus"
                   onClick={() =>
