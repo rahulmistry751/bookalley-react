@@ -1,5 +1,5 @@
 import { useProduct } from "../../context/product-context";
-import { addToWishlist, removeFromWishlist } from "../../utils";
+import { addToWishlist, removeFromWishlist, addToCart } from "../../utils";
 import "./Card.css";
 const Card = ({ item }) => {
   const { productDispatch, wishlist } = useProduct();
@@ -41,7 +41,12 @@ const Card = ({ item }) => {
           </div>
         </div>
         <div className="card-footer">
-          <button className="button button-full">Add to cart</button>
+          <button
+            className="button button-full"
+            onClick={() => addToCart(productDispatch, item)}
+          >
+            Add to cart
+          </button>
         </div>
       </div>
     </div>

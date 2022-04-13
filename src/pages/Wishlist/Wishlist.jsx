@@ -6,7 +6,7 @@ const Wishlist = () => {
   return (
     <section className="wishlist-section">
       <div className="wishlist-heading">
-        <h4 className="h3 fw-600">Wishlist</h4>
+        <h4 className="h3 fw-600">My Wishlist</h4>
       </div>
       {wishlist.length ? (
         <div className="wishlist-list">

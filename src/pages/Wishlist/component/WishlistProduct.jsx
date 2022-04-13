@@ -1,5 +1,5 @@
 import { useProduct } from "../../../context/product-context";
-import { addToWishlist, removeFromWishlist } from "../../../utils";
+import { addToWishlist, removeFromWishlist, moveToCart } from "../../../utils";
 import "../Wishlist.css";
 const WishlistProduct = ({ item }) => {
   const { productDispatch, wishlist } = useProduct();
@@ -40,7 +40,12 @@ const WishlistProduct = ({ item }) => {
           </div>
         </div>
         <div className="card-footer">
-          <button className="button button-full">Move to cart</button>
+          <button
+            className="button button-full"
+            onClick={() => moveToCart(productDispatch, item)}
+          >
+            Move to cart
+          </button>
         </div>
       </div>
     </div>
