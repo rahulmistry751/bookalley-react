@@ -5,6 +5,7 @@ import { Card } from "../Card/Card";
 import { useProduct } from "../../context/product-context";
 const PopularNow = () => {
   const { products } = useProduct();
+
   return (
     <div className="popular-section">
       <div className="popular-heading">

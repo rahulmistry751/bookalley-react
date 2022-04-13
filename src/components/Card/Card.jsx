@@ -1,10 +1,25 @@
+import { useProduct } from "../../context/product-context";
+import { addToWishlist, removeFromWishlist } from "../../utils";
 import "./Card.css";
 const Card = ({ item }) => {
+  const { productDispatch, wishlist } = useProduct();
+  let isWishlisted = wishlist.find(
+    (wishlistitem) => wishlistitem._id === item._id
+  );
   return (
     <div className="card">
       <div className="card-img-container">
         <img src={item.img} alt="" className="card-img" />
-        <i className="fas fa-bookmark card-like"></i>
+        <i
+          className={`fas fa-bookmark card-like ${
+            isWishlisted ? "wishlist-like" : ""
+          }`}
+          onClick={() => {
+            isWishlisted
+              ? removeFromWishlist(productDispatch, item)
+              : addToWishlist(productDispatch, item);
+          }}
+        ></i>
       </div>
 
       <div className="card-content txt-l">

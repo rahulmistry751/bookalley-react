@@ -1,7 +1,8 @@
-import { INITIAL_ACTIONS, FILTER_ACTIONS } from "../utils";
+import { INITIAL_ACTIONS, FILTER_ACTIONS, PRODUCT_ACTIONS } from "../utils";
 import { defaultProductState } from "../context/product-context";
 export let initialProductData = [];
 let initialCategoryData = {};
+let updatedWishlistItems = [];
 const productReducer = (productState, action) => {
   switch (action.type) {
     case INITIAL_ACTIONS.INITIALIZE_PRODUCTS:
@@ -46,6 +47,28 @@ const productReducer = (productState, action) => {
         products: initialProductData,
         categories: initialCategoryData,
       };
+    case PRODUCT_ACTIONS.ADD_TO_WISHLIST:
+      if (productState.wishlist.length) {
+        updatedWishlistItems = productState.wishlist.map((item) => {
+          return item._id === action.payload.product._id
+            ? [...productState.wishlist]
+            : [...productState.wishlist, { ...action.payload.product }];
+        })[0];
+      } else {
+        updatedWishlistItems = [
+          ...productState.wishlist,
+          { ...action.payload.product },
+        ];
+      }
+      return {
+        ...productState,
+        wishlist: updatedWishlistItems,
+      };
+    case PRODUCT_ACTIONS.REMOVE_FROM_WISHLIST:
+      updatedWishlistItems = productState.wishlist.filter(
+        (wishItem) => wishItem._id !== action.payload.product._id
+      );
+      return { ...productState, wishlist: updatedWishlistItems };
     default:
       return productState;
   }

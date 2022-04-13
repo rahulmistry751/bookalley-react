@@ -1,22 +1,26 @@
 import "./Wishlist.css";
-import { Card } from "../../components";
-import { products } from "../../backend/db/products";
+import { WishlistProduct } from "./component/WishlistProduct";
+import { useProduct } from "../../context/product-context";
 const Wishlist = () => {
+  const { wishlist } = useProduct();
   return (
     <section className="wishlist-section">
       <div className="wishlist-heading">
         <h4 className="h3 fw-600">Wishlist</h4>
       </div>
-
-      <div className="wishlist-list">
-        <ul className="list">
-          {products.map((item) => (
-            <li className="list-item">
-              <Card item={item} />
-            </li>
-          ))}
-        </ul>
-      </div>
+      {wishlist.length ? (
+        <div className="wishlist-list">
+          <ul className="list">
+            {wishlist.map((item) => (
+              <li className="list-item" key={item._id}>
+                <WishlistProduct item={item} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div className="h3 txt-c">There is no book stack in your wishlist</div>
+      )}
     </section>
   );
 };
