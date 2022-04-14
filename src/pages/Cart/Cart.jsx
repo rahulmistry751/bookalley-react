@@ -23,7 +23,7 @@ const Cart = () => {
           <PriceDetails />
         </div>
       ) : (
-        <div className=" h3 txt-c fw-600">Your cart is empty!</div>
+        <div className=" h3 txt-c ">Your cart is empty!</div>
       )}
     </>
   );
