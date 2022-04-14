@@ -3,7 +3,7 @@ import "./Header.css";
 import { Link } from "react-router-dom";
 import { useProduct } from "../../context/product-context";
 const Header = () => {
-  const { wishlist } = useProduct();
+  const { wishlist, cart } = useProduct();
   return (
     <header className="header">
       <nav className="navbar">
@@ -58,9 +58,18 @@ const Header = () => {
             </Link>
           </li>
           <li className="navbar-item">
-            <Link to="/cart" aria-label="cart link">
+            <Link
+              to="/cart"
+              aria-label="cart link"
+              className={cart.length ? "badge-icon" : ""}
+            >
               <div className="badge-container">
                 <i className="fas fa-cart-plus fa-lg badge-icon"></i>
+                {cart.length ? (
+                  <span className="badge">{cart.length}</span>
+                ) : (
+                  ""
+                )}
               </div>
             </Link>
           </li>

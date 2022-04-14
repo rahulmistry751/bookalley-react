@@ -1,5 +1,12 @@
+import { useProduct } from "../../../context/product-context";
+import {
+  removeFromCart,
+  moveToWishlist,
+  PRODUCT_ACTIONS,
+} from "../../../utils";
 import "../Cart.css";
 const CartProduct = ({ item }) => {
+  const { productDispatch } = useProduct();
   return (
     <div className="card card-hori">
       <div className="card-image">
@@ -22,28 +29,58 @@ const CartProduct = ({ item }) => {
               {item.rating}
             </div>
             <div className="qty">
-              <button className="button button-sm">
-                <i className="fas fa-minus"></i>
+              <button
+                className="button button-sm"
+                disabled={item.quantity > 1 ? false : true}
+              >
+                <i
+                  className="fas fa-minus"
+                  onClick={() =>
+                    productDispatch({
+                      type: PRODUCT_ACTIONS.DECREASE_QTY,
+                      payload: {
+                        product: item,
+                      },
+                    })
+                  }
+                ></i>
               </button>
               <input
                 type="text"
-                value="1"
+                value={item.quantity}
                 className="input-qty txt-c"
                 min="1"
                 max="50"
+                readOnly
               />
               <button className="button button-sm">
-                <i className="fas fa-plus"></i>
+                <i
+                  className="fas fa-plus"
+                  onClick={() =>
+                    productDispatch({
+                      type: PRODUCT_ACTIONS.INCREASE_QTY,
+                      payload: {
+                        product: item,
+                      },
+                    })
+                  }
+                ></i>
               </button>
             </div>
           </div>
         </div>
         <div className="card-footer cart-footer">
-          <button className="button button-full mgb-16">
+          <button
+            className="button button-full mgb-16"
+            onClick={() => removeFromCart(productDispatch, item)}
+          >
             Remove from cart
           </button>
-          <button className="button button-outlined button-full">
-            Add to wishlist
+          <button
+            className="button button-outlined button-full"
+            onClick={() => moveToWishlist(productDispatch, item)}
+          >
+            Move to wishlist
           </button>
         </div>
       </div>

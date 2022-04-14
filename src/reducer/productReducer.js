@@ -3,6 +3,7 @@ import { defaultProductState } from "../context/product-context";
 export let initialProductData = [];
 let initialCategoryData = {};
 let updatedWishlistItems = [];
+let updatedCartItems = [];
 const productReducer = (productState, action) => {
   switch (action.type) {
     case INITIAL_ACTIONS.INITIALIZE_PRODUCTS:
@@ -69,6 +70,54 @@ const productReducer = (productState, action) => {
         (wishItem) => wishItem._id !== action.payload.product._id
       );
       return { ...productState, wishlist: updatedWishlistItems };
+    case PRODUCT_ACTIONS.ADD_TO_CART:
+      if (productState.cart.length) {
+        updatedCartItems = productState.cart.map((item) => {
+          return item._id === action.payload.product._id
+            ? [...productState.cart]
+            : [
+                ...productState.cart,
+                { ...action.payload.product, quantity: 1 },
+              ];
+        })[0];
+      } else {
+        updatedCartItems = [
+          ...productState.cart,
+          { ...action.payload.product, quantity: 1 },
+        ];
+      }
+      return {
+        ...productState,
+        cart: updatedCartItems,
+      };
+    case PRODUCT_ACTIONS.REMOVE_FROM_CART:
+      updatedCartItems = productState.cart.filter(
+        (cartItem) => cartItem._id !== action.payload.product._id
+      );
+      return {
+        ...productState,
+        cart: updatedCartItems,
+      };
+    case PRODUCT_ACTIONS.INCREASE_QTY:
+      updatedCartItems = productState.cart.map((cartItem) =>
+        cartItem._id === action.payload.product._id
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
+      );
+      return {
+        ...productState,
+        cart: updatedCartItems,
+      };
+    case PRODUCT_ACTIONS.DECREASE_QTY:
+      updatedCartItems = productState.cart.map((cartItem) =>
+        cartItem._id === action.payload.product._id
+          ? { ...cartItem, quantity: cartItem.quantity - 1 }
+          : cartItem
+      );
+      return {
+        ...productState,
+        cart: updatedCartItems,
+      };
     default:
       return productState;
   }

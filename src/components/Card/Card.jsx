@@ -1,11 +1,13 @@
 import { useProduct } from "../../context/product-context";
-import { addToWishlist, removeFromWishlist } from "../../utils";
+import { addToWishlist, removeFromWishlist, addToCart } from "../../utils";
+import { Link } from "react-router-dom";
 import "./Card.css";
 const Card = ({ item }) => {
-  const { productDispatch, wishlist } = useProduct();
+  const { productDispatch, wishlist, cart } = useProduct();
   let isWishlisted = wishlist.find(
     (wishlistitem) => wishlistitem._id === item._id
   );
+  let inCart = cart.find((cartItem) => cartItem._id === item._id);
   return (
     <div className="card">
       <div className="card-img-container">
@@ -41,7 +43,18 @@ const Card = ({ item }) => {
           </div>
         </div>
         <div className="card-footer">
-          <button className="button button-full">Add to cart</button>
+          {!inCart ? (
+            <button
+              className="button button-full"
+              onClick={() => addToCart(productDispatch, item)}
+            >
+              Add to cart
+            </button>
+          ) : (
+            <Link to="/cart">
+              <button className="button button-full"> Go to Cart</button>
+            </Link>
+          )}
         </div>
       </div>
     </div>
