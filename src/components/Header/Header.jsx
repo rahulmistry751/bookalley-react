@@ -1,9 +1,11 @@
 import React from "react";
-import "./Header.css";
 import { Link } from "react-router-dom";
 import { useProduct } from "../../context/product-context";
+import {useAuth} from '../../context/auth-context';
+import "./Header.css";
 const Header = () => {
   const { wishlist, cart } = useProduct();
+  const {userToken}=useAuth();
   return (
     <header className="header">
       <nav className="navbar">
@@ -32,15 +34,13 @@ const Header = () => {
             </Link>
           </li>
           <li className="navbar-item">
-            <Link to="/login">
+            {userToken?<Link to="/profile">
               <i className="fas fa-user"></i>
-            </Link>
+            </Link>:<Link to="/login">
+              <i className="fas fa-sign-in"></i>
+            </Link>}
           </li>
-          <li className="navbar-item">
-            <Link to="logout" aria-label="logout link">
-              <i className="fas fa-sign-out"></i>
-            </Link>
-          </li>
+          
           <li className="navbar-item">
             <Link
               to="/wishlist"

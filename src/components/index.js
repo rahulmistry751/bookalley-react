@@ -3,4 +3,5 @@ import { Hero } from "./Hero/Hero";
 import { PopularNow } from "./PopularNow/PopularNow";
 import { Card } from "./Card/Card";
 import { Filter } from "./Filter/Filter";
-export { Header, Hero, PopularNow, Card, Filter };
+import {RequiresAuth} from './RequiresAuth/RequiresAuth';
+export { Header, Hero, PopularNow, Card, Filter,RequiresAuth};

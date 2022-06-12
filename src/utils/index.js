@@ -11,6 +11,7 @@ import { moveToWishlist } from "./wishlistUtils/moveToWishlist";
 import { calculatePrice } from "./cartUtils/calculatePrice";
 import { calculateDiscount } from "./cartUtils/calculatePrice";
 import { calculateTotalPrice } from "./cartUtils/calculatePrice";
+import { validateForm } from "./authUtils/validateForm";
 export {
   INITIAL_ACTIONS,
   FILTER_ACTIONS,
@@ -25,4 +26,5 @@ export {
   calculateDiscount,
   calculatePrice,
   calculateTotalPrice,
+  validateForm
 };

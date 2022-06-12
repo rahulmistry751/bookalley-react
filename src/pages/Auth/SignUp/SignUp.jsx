@@ -1,94 +1,121 @@
+import { useState,useEffect } from "react";
+import { Link,useLocation,useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/auth-context";
+import { validateForm } from "../../../utils";
 import "../auth.css";
-import { Link } from "react-router-dom";
 const SignUp = () => {
+  const navigate=useNavigate();
+  const {signupHandler,userToken,setAuthError,authError}=useAuth();
+  const [signupCredential,setSignupCredential]=useState({firstName:"",lastName:"",email:"",password:""})
+  const signupChangeHandler=(e)=>{
+  const {name,value}=e.target;
+    setSignupCredential({...signupCredential,[name]:value})
+  }
+  const submitHandler=(e)=>{
+    e.preventDefault();
+    signupHandler(signupCredential);
+  }
+  useEffect(()=>{
+    if(userToken){
+      navigate('/',{replace:true})
+    }
+
+  },[userToken])
   return (
-    <div class="auth login">
-      <div class="card text-only card-login">
-        <div class="card-header h3 fw-600 mg-16 txt-c">
+    <div className="auth login">
+      <div className="card text-only card-login">
+        <div className="card-header h3 fw-600 mg-16 txt-c">
           Sign up to BookAlley
         </div>
-        <div class="card-content txt-l">
-          <form action="" class="signup">
-            <div class="signup-fn">
-              <label for="firstName" class="control-label gray fs-12">
+        <div className="card-content txt-l">
+          <form action="" className="signup" onSubmit={submitHandler}>
+            <div className="signup-fn">
+              <label htmlFor="firstName" className="control-label gray fs-12">
                 First Name
               </label>
               <input
                 type="text"
-                class="input form-control"
+                className="input form-control"
                 id="firstName"
                 name="firstName"
+                required
+                onChange={(e)=>signupChangeHandler(e)}
+                value={signupCredential.firstName}
               />
             </div>
-            <div class="signup-ln">
-              <label for="lastName" class="control-label gray fs-12">
+            <div className="signup-ln">
+              <label htmlFor="lastName" className="control-label gray fs-12">
                 Last Name
               </label>
               <input
                 type="text"
-                class="input form-control"
+                className="input form-control"
                 id="lastName"
                 name="lastName"
+                required
+                onChange={(e)=>signupChangeHandler(e)}
+                value={signupCredential.lastName}
+
               />
             </div>
-            <div class="signup-un">
-              <label for="username" class="control-label gray fs-12">
-                Username
-              </label>
-              <input
-                type="text"
-                class="input form-control"
-                id="username"
-                name="username"
-              />
-            </div>
-            <div class="signup-pass">
-              <label for="password" class="control-label gray fs-12">
+            <div className="signup-pass">
+              <label htmlFor="password" className="control-label gray fs-12">
                 Password
               </label>
               <input
                 type="password"
-                class="input form-control"
+                className="input form-control"
                 id="password"
                 name="password"
-                autocomplete="off"
+                autoComplete="off"
+                required
+                onChange={(e)=>signupChangeHandler(e)}
+                value={signupCredential.password}
+
               />
             </div>
-            <div class="signup-email">
-              <label for="email" class="control-label gray fs-12">
+            <div className="signup-email">
+              <label htmlFor="email" className="control-label gray fs-12">
                 Email
               </label>
               <input
                 type="email"
-                class="input form-control"
+                className="input form-control"
                 id="email"
                 name="email"
-                autocomplete="off"
+                autoComplete="off"
+                required
+                onChange={(e)=>signupChangeHandler(e)}
+                value={signupCredential.email}
               />
             </div>
-            <div class="secondary-action txt-r fs-12">
-              <span class="save-login">
+            <div className="secondary-action txt-r fs-12">
+              <span className="save-login">
                 <input
                   type="checkbox"
-                  class="input-checkbox checkbox-terms"
+                  className="input-checkbox checkbox-terms"
                   id="terms"
+                  required
                 />
-                <label for="terms" class="gray">
-                  I accept all Terms & conditions
+                <label htmlFor="terms" className="gray">
+                   I accept all Terms & conditions
                 </label>
               </span>
             </div>
-            <div class="primary-action txt-c">
-              <button class="button button-full" type="submit">
+            {
+              authError && <div className="error mgb-16">{authError}</div>
+            }
+            <div className="primary-action txt-c">
+              <button className="button button-full" type="submit">
                 Sign Up
               </button>
             </div>
           </form>
         </div>
       </div>
-      <div class="create-account">
+      <div className="create-account">
         <span>Already have an account? </span>
-        <Link to="/login" class="fw-600">
+        <Link to="/login" className="fw-600">
           Log In
         </Link>
       </div>
