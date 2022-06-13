@@ -12,6 +12,17 @@ const CartProduct = ({ item }) => {
     addToWishlistLocally(item);
     removeCartProductLocally(item);
   }
+  console.log(item)
+  const decreaseQuantityHandler=()=>{
+    if(item.qty>1){
+      productDispatch({
+        type: PRODUCT_ACTIONS.DECREASE_QTY,
+        payload: {
+          product: item,
+        },
+      })
+    }
+  }
   return (
     <div className="card card-hori">
       <div className="card-image">
@@ -40,14 +51,7 @@ const CartProduct = ({ item }) => {
               >
                 <i
                   className="fas fa-minus"
-                  onClick={() =>
-                    productDispatch({
-                      type: PRODUCT_ACTIONS.DECREASE_QTY,
-                      payload: {
-                        product: item,
-                      },
-                    })
-                  }
+                  onClick={decreaseQuantityHandler}
                 ></i>
               </button>
               <input
