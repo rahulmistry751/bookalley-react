@@ -1,4 +1,4 @@
-import { INITIAL_ACTIONS, FILTER_ACTIONS, PRODUCT_ACTIONS } from "../utils";
+import { INITIAL_ACTIONS, FILTER_ACTIONS, PRODUCT_ACTIONS, USER_ACTIONS } from "../utils";
 import { defaultProductState } from "../context/product-context";
 export let initialProductData = [];
 let initialCategoryData = {};
@@ -70,6 +70,8 @@ const productReducer = (productState, action) => {
         (wishItem) => wishItem._id !== action.payload.product._id
       );
       return { ...productState, wishlist: updatedWishlistItems };
+    case PRODUCT_ACTIONS.UPDATE_WISHLIST:
+      return {...productState,wishlist:action.payload.wishlist}
     case PRODUCT_ACTIONS.ADD_TO_CART:
       if (productState.cart.length) {
         updatedCartItems = productState.cart.map((item) => {
@@ -77,13 +79,13 @@ const productReducer = (productState, action) => {
             ? [...productState.cart]
             : [
                 ...productState.cart,
-                { ...action.payload.product, quantity: 1 },
+                { ...action.payload.product, qty: 1 },
               ];
         })[0];
       } else {
         updatedCartItems = [
           ...productState.cart,
-          { ...action.payload.product, quantity: 1 },
+          { ...action.payload.product, qty: 1 },
         ];
       }
       return {
@@ -101,7 +103,7 @@ const productReducer = (productState, action) => {
     case PRODUCT_ACTIONS.INCREASE_QTY:
       updatedCartItems = productState.cart.map((cartItem) =>
         cartItem._id === action.payload.product._id
-          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          ? { ...cartItem, qty: cartItem.qty + 1 }
           : cartItem
       );
       return {
@@ -111,13 +113,17 @@ const productReducer = (productState, action) => {
     case PRODUCT_ACTIONS.DECREASE_QTY:
       updatedCartItems = productState.cart.map((cartItem) =>
         cartItem._id === action.payload.product._id
-          ? { ...cartItem, quantity: cartItem.quantity - 1 }
+          ? { ...cartItem, qty: cartItem.qty - 1 }
           : cartItem
       );
       return {
         ...productState,
         cart: updatedCartItems,
       };
+    case PRODUCT_ACTIONS.UPDATE_CART:
+      return {...productState,cart:action.payload.cart}
+    case USER_ACTIONS.LOGOUT:
+      return {...productState,wishlist:[],cart:[]}
     default:
       return productState;
   }

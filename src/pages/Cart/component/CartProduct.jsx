@@ -1,12 +1,29 @@
 import { useProduct } from "../../../context/product-context";
+import { useCartServices,useWishlistServices } from "../../../hooks";
 import {
-  removeFromCart,
-  moveToWishlist,
   PRODUCT_ACTIONS,
 } from "../../../utils";
+import { toast } from "react-toastify";
 import "../Cart.css";
 const CartProduct = ({ item }) => {
   const { productDispatch } = useProduct();
+  const {removeCartProductLocally}=useCartServices();
+  const {addToWishlistLocally}=useWishlistServices();
+  const moveToWishlisthandler=()=>{
+    addToWishlistLocally(item);
+    removeCartProductLocally(item);
+    toast.success("Moved to wishlist")
+  }
+  const decreaseQuantityHandler=()=>{
+    if(item.qty>1){
+      productDispatch({
+        type: PRODUCT_ACTIONS.DECREASE_QTY,
+        payload: {
+          product: item,
+        },
+      })
+    }
+  }
   return (
     <div className="card card-hori">
       <div className="card-image">
@@ -31,23 +48,16 @@ const CartProduct = ({ item }) => {
             <div className="qty">
               <button
                 className="button button-sm"
-                disabled={item.quantity > 1 ? false : true}
+                disabled={item.qty > 1 ? false : true}
               >
                 <i
                   className="fas fa-minus"
-                  onClick={() =>
-                    productDispatch({
-                      type: PRODUCT_ACTIONS.DECREASE_QTY,
-                      payload: {
-                        product: item,
-                      },
-                    })
-                  }
+                  onClick={decreaseQuantityHandler}
                 ></i>
               </button>
               <input
                 type="text"
-                value={item.quantity}
+                value={item.qty}
                 className="input-qty txt-c"
                 min="1"
                 max="50"
@@ -72,13 +82,16 @@ const CartProduct = ({ item }) => {
         <div className="card-footer cart-footer">
           <button
             className="button button-full mgb-16"
-            onClick={() => removeFromCart(productDispatch, item)}
+            onClick={() =>{
+              removeCartProductLocally(item)
+              toast.success("Removed from cart")
+            }}
           >
             Remove from cart
           </button>
           <button
             className="button button-outlined button-full"
-            onClick={() => moveToWishlist(productDispatch, item)}
+            onClick={moveToWishlisthandler}
           >
             Move to wishlist
           </button>

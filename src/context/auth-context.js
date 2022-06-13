@@ -1,6 +1,6 @@
 import { createContext,useContext,useState } from "react";
 import axios from 'axios';
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { validateForm } from "../utils";
 const AuthContext=createContext();
 
@@ -25,13 +25,7 @@ const AuthContextProvider=({children})=>{
             }
         }
     }
-    const logoutHandler=()=>{
-        setUserDetails('');
-        setUserToken('');
-       
-        localStorage.removeItem('loginDetails');
-        navigate("/")
-    }
+ 
     const signupHandler=async ({firstName,lastName,email,password})=>{
         if(validateForm(email,password,setAuthError)){
             try{
@@ -53,7 +47,7 @@ const AuthContextProvider=({children})=>{
     }
     
     return(
-        <AuthContext.Provider value={{loginHandler,signupHandler,setAuthError,authError,userToken,userDetails,logoutHandler}}>
+        <AuthContext.Provider value={{loginHandler,signupHandler,setAuthError,authError,userToken,userDetails,setUserDetails,setUserToken}}>
             {children}
         </AuthContext.Provider>
     )

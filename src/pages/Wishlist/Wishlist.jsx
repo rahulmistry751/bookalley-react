@@ -1,6 +1,7 @@
 import "./Wishlist.css";
 import { WishlistProduct } from "./component/WishlistProduct";
-import { useProduct } from "../../context/product-context";
+import { useProduct} from "../../context";
+import { ToastContainer } from "react-toastify";
 const Wishlist = () => {
   const { wishlist } = useProduct();
   return (
@@ -21,6 +22,7 @@ const Wishlist = () => {
       ) : (
         <div className="h3 txt-c">There is no book stack in your wishlist</div>
       )}
+      <ToastContainer autoClose={1000}/>
     </section>
   );
 };

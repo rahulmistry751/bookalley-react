@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./PopularNow.css";
 import { Card } from "../Card/Card";
+import { ToastContainer } from "react-toastify";
 import { useProduct } from "../../context/product-context";
 const PopularNow = () => {
   const { products } = useProduct();
@@ -24,6 +25,7 @@ const PopularNow = () => {
           ))}
         </ul>
       </div>
+      <ToastContainer autoClose={1000}/>
     </div>
   );
 };
