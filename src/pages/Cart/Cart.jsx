@@ -2,7 +2,7 @@ import { useProduct } from "../../context/product-context";
 import "./Cart.css";
 import { CartProduct } from "./component/CartProduct";
 import { PriceDetails } from "./component/PriceDetails";
-
+import { ToastContainer } from "react-toastify";
 const Cart = () => {
   const { cart } = useProduct();
 
@@ -25,6 +25,7 @@ const Cart = () => {
       ) : (
         <div className=" h3 txt-c ">Your cart is empty!</div>
       )}
+      <ToastContainer autoClose={1000}/>
     </>
   );
 };

@@ -11,7 +11,7 @@ const useWishlistServices=()=>{
     }
     const addToWishlistLocally=async(product)=>{
         const response=await addToWishlistInServer(userToken,product)
-        addToWishlist(productDispatch,product)
+        addToWishlist(productDispatch,product)  
     }
     const removeWishlistProductLocally=async(product)=>{
         const response=await removeWishlistProductFromServer(userToken,product)

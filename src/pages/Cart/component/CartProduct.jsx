@@ -3,6 +3,7 @@ import { useCartServices,useWishlistServices } from "../../../hooks";
 import {
   PRODUCT_ACTIONS,
 } from "../../../utils";
+import { toast } from "react-toastify";
 import "../Cart.css";
 const CartProduct = ({ item }) => {
   const { productDispatch } = useProduct();
@@ -11,8 +12,8 @@ const CartProduct = ({ item }) => {
   const moveToWishlisthandler=()=>{
     addToWishlistLocally(item);
     removeCartProductLocally(item);
+    toast.success("Moved to wishlist")
   }
-  console.log(item)
   const decreaseQuantityHandler=()=>{
     if(item.qty>1){
       productDispatch({
@@ -81,7 +82,10 @@ const CartProduct = ({ item }) => {
         <div className="card-footer cart-footer">
           <button
             className="button button-full mgb-16"
-            onClick={() =>removeCartProductLocally(item)}
+            onClick={() =>{
+              removeCartProductLocally(item)
+              toast.success("Removed from cart")
+            }}
           >
             Remove from cart
           </button>

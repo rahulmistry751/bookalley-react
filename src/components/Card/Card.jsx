@@ -1,6 +1,7 @@
 import { useProduct } from "../../context/product-context";
 import { useWishlistServices,useCartServices} from "../../hooks";
 import { Link,useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "./Card.css";
 import { useAuth } from "../../context";
 const Card = ({ item }) => {
@@ -17,6 +18,7 @@ const Card = ({ item }) => {
   const addToCartHandler=()=>{
     if(userToken){
       addToCartLocally(item)
+      toast.success("Added to cart");
     }
     else{
       navigate('/login',{state:{from:location}})
@@ -26,9 +28,14 @@ const Card = ({ item }) => {
     if(userToken){
       if(isWishlisted){
         removeWishlistProductLocally(item)
+        toast.success("Removed from wishlist");
+
       }
-      else
+      else{
         addToWishlistLocally(item)
+        toast.success("Added to wishlist");
+      }
+
     }
     else{
       navigate('/login',{state:{from:location}})

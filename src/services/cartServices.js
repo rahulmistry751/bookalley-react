@@ -4,7 +4,6 @@ const cartServices=()=>{
     const getUserCartFromServer=async (token)=>{
         try{
             const response=await axios.get('/api/user/cart',{headers:{authorization:token}})
-            console.log(response);
             return response
         }
         catch(error){

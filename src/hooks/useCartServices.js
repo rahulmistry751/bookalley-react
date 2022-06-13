@@ -1,6 +1,7 @@
 import { useProduct,useAuth } from "../context";
 import { cartServices } from "../services";
 import { updateCart,addToCart,removeFromCart } from "../utils";
+import { toast } from "react-toastify";
 const useCartServices=()=>{
     const {productDispatch}=useProduct();
     const {userToken}=useAuth();
@@ -12,6 +13,7 @@ const useCartServices=()=>{
     const addToCartLocally=async(product)=>{
         const response=await addToCartInServer(userToken,product)
         addToCart(productDispatch, product)
+        
     }
     const removeCartProductLocally=async(product)=>{
         const response=await removeCartProductFromServer(userToken,product)

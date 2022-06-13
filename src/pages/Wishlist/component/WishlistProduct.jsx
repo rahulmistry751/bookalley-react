@@ -1,6 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useProduct,useAuth } from "../../../context";
 import { useWishlistServices,useCartServices } from "../../../hooks";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import "../Wishlist.css";
 const WishlistProduct = ({ item }) => {
   const navigate=useNavigate();
@@ -16,9 +18,13 @@ const WishlistProduct = ({ item }) => {
     if(userToken){
       if(isWishlisted){
         removeWishlistProductLocally(item)
+        toast.success("Removed from wishlist")
       }
-      else
+      else{
         addToWishlistLocally(item)
+        toast.success("Added to wishlist")
+      }
+
     }
     else{
       navigate('/login',{state:{from:location}})
@@ -27,6 +33,7 @@ const WishlistProduct = ({ item }) => {
   const moveToCartHandler=()=>{
     addToCartLocally(item);
     removeWishlistProductLocally(item)
+    toast.success("Moved to cart")
   }
   return (
     <div className="card">

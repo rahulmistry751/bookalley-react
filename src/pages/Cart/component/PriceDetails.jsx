@@ -6,7 +6,6 @@ import {
 } from "../../../utils";
 const PriceDetails = () => {
   const { cart } = useProduct();
-  console.log(cart);
   return (
     <>
       {cart.length ? (
