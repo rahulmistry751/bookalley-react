@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useProduct } from "../../context/product-context";
 import {useAuth} from '../../context/auth-context';
 import "./Header.css";
+import { useWishlistServices,useCartServices } from "../../hooks";
 const Header = () => {
   const { wishlist, cart } = useProduct();
   const {userToken}=useAuth();
+  const {updateWishlistLocally}=useWishlistServices();
+  const {updateCartLocally}=useCartServices();
+  useEffect(()=>{
+    if(userToken){
+      updateWishlistLocally();
+      updateCartLocally();
+    }
+  },[userToken])
   return (
     <header className="header">
       <nav className="navbar">

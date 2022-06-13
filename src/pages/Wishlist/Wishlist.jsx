@@ -1,6 +1,6 @@
 import "./Wishlist.css";
 import { WishlistProduct } from "./component/WishlistProduct";
-import { useProduct } from "../../context/product-context";
+import { useProduct} from "../../context";
 const Wishlist = () => {
   const { wishlist } = useProduct();
   return (

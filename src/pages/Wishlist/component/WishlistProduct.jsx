@@ -1,11 +1,33 @@
-import { useProduct } from "../../../context/product-context";
-import { addToWishlist, removeFromWishlist, moveToCart } from "../../../utils";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useProduct,useAuth } from "../../../context";
+import { useWishlistServices,useCartServices } from "../../../hooks";
 import "../Wishlist.css";
 const WishlistProduct = ({ item }) => {
-  const { productDispatch, wishlist } = useProduct();
+  const navigate=useNavigate();
+  const location=useLocation();
+  const {wishlist } = useProduct();
+  const {addToWishlistLocally,removeWishlistProductLocally}=useWishlistServices();
+  const {addToCartLocally}=useCartServices();
+  const {userToken}=useAuth();
   let isWishlisted = wishlist.find(
     (wishlistitem) => wishlistitem._id === item._id
   );
+  const addToWishlistHandler=()=>{
+    if(userToken){
+      if(isWishlisted){
+        removeWishlistProductLocally(item)
+      }
+      else
+        addToWishlistLocally(item)
+    }
+    else{
+      navigate('/login',{state:{from:location}})
+    }
+  }
+  const moveToCartHandler=()=>{
+    addToCartLocally(item);
+    removeWishlistProductLocally(item)
+  }
   return (
     <div className="card">
       <div className="card-img-container">
@@ -14,11 +36,7 @@ const WishlistProduct = ({ item }) => {
           className={`fas fa-bookmark card-like ${
             isWishlisted ? "wishlist-like" : ""
           }`}
-          onClick={() => {
-            isWishlisted
-              ? removeFromWishlist(productDispatch, item)
-              : addToWishlist(productDispatch, item);
-          }}
+          onClick={addToWishlistHandler}
         ></i>
       </div>
 
@@ -42,7 +60,7 @@ const WishlistProduct = ({ item }) => {
         <div className="card-footer">
           <button
             className="button button-full"
-            onClick={() => moveToCart(productDispatch, item)}
+            onClick={moveToCartHandler}
           >
             Move to cart
           </button>

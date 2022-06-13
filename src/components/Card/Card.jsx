@@ -1,13 +1,39 @@
 import { useProduct } from "../../context/product-context";
-import { addToWishlist, removeFromWishlist, addToCart } from "../../utils";
-import { Link } from "react-router-dom";
+import { useWishlistServices,useCartServices} from "../../hooks";
+import { Link,useLocation, useNavigate } from "react-router-dom";
 import "./Card.css";
+import { useAuth } from "../../context";
 const Card = ({ item }) => {
-  const { productDispatch, wishlist, cart } = useProduct();
+  const location=useLocation();
+  const navigate=useNavigate();
+  const {addToWishlistLocally,removeWishlistProductLocally}=useWishlistServices();
+  const {addToCartLocally}=useCartServices();
+  const { wishlist, cart } = useProduct();
+  const {userToken}=useAuth();
   let isWishlisted = wishlist.find(
     (wishlistitem) => wishlistitem._id === item._id
   );
   let inCart = cart.find((cartItem) => cartItem._id === item._id);
+  const addToCartHandler=()=>{
+    if(userToken){
+      addToCartLocally(item)
+    }
+    else{
+      navigate('/login',{state:{from:location}})
+    }
+  }
+  const addToWishlistHandler=()=>{
+    if(userToken){
+      if(isWishlisted){
+        removeWishlistProductLocally(item)
+      }
+      else
+        addToWishlistLocally(item)
+    }
+    else{
+      navigate('/login',{state:{from:location}})
+    }
+  }
   return (
     <div className="card">
       <div className="card-img-container">
@@ -16,11 +42,7 @@ const Card = ({ item }) => {
           className={`fas fa-bookmark card-like ${
             isWishlisted ? "wishlist-like" : ""
           }`}
-          onClick={() => {
-            isWishlisted
-              ? removeFromWishlist(productDispatch, item)
-              : addToWishlist(productDispatch, item);
-          }}
+          onClick={addToWishlistHandler}
         ></i>
       </div>
 
@@ -46,7 +68,7 @@ const Card = ({ item }) => {
           {!inCart ? (
             <button
               className="button button-full"
-              onClick={() => addToCart(productDispatch, item)}
+              onClick={addToCartHandler}
             >
               Add to cart
             </button>

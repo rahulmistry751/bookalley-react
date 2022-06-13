@@ -1,7 +1,19 @@
 import style from './Profile.module.css';
 import { useAuth } from '../../context/auth-context';
+import { useNavigate } from 'react-router-dom';
+import { useProduct } from '../../context';
+import { USER_ACTIONS } from '../../utils';
 const Profile=()=>{
-    const {userDetails,logoutHandler}=useAuth();
+    const navigate=useNavigate();
+    const {userDetails,setUserDetails,setUserToken}=useAuth();
+    const {productDispatch}=useProduct();
+    const logoutHandler=()=>{
+        setUserDetails('');
+        setUserToken('');
+        productDispatch({type:USER_ACTIONS.LOGOUT})
+        localStorage.removeItem('loginDetails');
+        navigate("/")
+    }
     return(
         <div className={`${style['profile-container']}`}>
             <div className={`${style['profile']}`}>
