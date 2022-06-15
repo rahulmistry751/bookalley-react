@@ -26,7 +26,8 @@ const Header = () => {
             <i className="fas fa-bars"></i>
           </span>
         </button>
-        <div className="navbar-item search-container">
+        {/* TODO - search functionality to be implemented in future */}
+        {/* <div className="navbar-item search-container">
           <input
             type="search"
             className="input search"
@@ -35,7 +36,7 @@ const Header = () => {
           <button className="search-icon">
             <i className="far fa-search"></i>
           </button>
-        </div>
+        </div> */}
         <ul className="navbar-menu">
           <li className="navbar-item">
             <Link to="/productlist" aria-label="products link">

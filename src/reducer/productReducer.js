@@ -124,6 +124,8 @@ const productReducer = (productState, action) => {
       return {...productState,cart:action.payload.cart}
     case USER_ACTIONS.LOGOUT:
       return {...productState,wishlist:[],cart:[]}
+    case USER_ACTIONS.CLEAR_CART:
+      return {...productState,cart:[]}
     default:
       return productState;
   }

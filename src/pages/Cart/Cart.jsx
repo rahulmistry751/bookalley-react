@@ -5,7 +5,6 @@ import { PriceDetails } from "./component/PriceDetails";
 import { ToastContainer } from "react-toastify";
 const Cart = () => {
   const { cart } = useProduct();
-
   return (
     <>
       <h3 className="cart-header h3 fw-600">

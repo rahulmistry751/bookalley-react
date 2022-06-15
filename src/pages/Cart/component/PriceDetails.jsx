@@ -1,11 +1,18 @@
-import { useProduct } from "../../../context/product-context";
+import { useNavigate } from "react-router-dom";
+import { useAuth,useProduct } from "../../../context";
+import { useCartServices } from "../../../hooks";
+import { displayRazorpay } from "../../../utils";
 import {
   calculateDiscount,
   calculatePrice,
   calculateTotalPrice,
 } from "../../../utils";
 const PriceDetails = () => {
+  const navigate=useNavigate();
   const { cart } = useProduct();
+  const {userDetails,setUserDetails}=useAuth();
+  const {clearCartLocally}=useCartServices();
+  const totalPrice=calculateTotalPrice(cart)
   return (
     <>
       {cart.length ? (
@@ -28,9 +35,9 @@ const PriceDetails = () => {
                 </div>
                 <div className="catalogue total-amt-container">
                   <p className="total-amt">Total amount</p>
-                  <span className="amt">₹{calculateTotalPrice(cart)}</span>
+                  <span className="amt">₹{totalPrice}</span>
                 </div>
-                <button className="button ">Place the order</button>
+                <button className="button " onClick={()=>displayRazorpay(userDetails,totalPrice,navigate,clearCartLocally,setUserDetails)}>Place the order</button>
               </div>
             </div>
           </div>
